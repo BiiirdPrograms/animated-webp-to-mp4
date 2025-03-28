@@ -100,16 +100,6 @@ def process_image(path, timeout):
 
 def webp_mp4(filename, outfile, timeout):
   filename = '/'.join(filename.split('\\'))
-  outfile = '/'.join(outfile.split('\\'))
-
-  file_path = '{}/{}'.format(os.getcwd(), filename)
-  if not os.path.exists(file_path):
-    print('Can\'t find file %s' % (file_path))
-    return
-
-  outdir = '{}/{}'.format(os.getcwd(), '/'.join(outfile.split('/')[0:-1]))
-  if not os.path.exists(outdir):
-    os.mkdir(outdir)
 
   if (outfile is None):
     outfile = '.'.join(filename.split('.')[0:-1])
@@ -123,6 +113,17 @@ def webp_mp4(filename, outfile, timeout):
         index += 1
 
     outfile += str(index) + '.mp4'
+  else:
+    outfile = '/'.join(outfile.split('\\'))
+
+  file_path = '{}/{}'.format(os.getcwd(), filename)
+  if not os.path.exists(file_path):
+    print('Can\'t find file %s' % (file_path))
+    return
+
+  outdir = '{}/{}'.format(os.getcwd(), '/'.join(outfile.split('/')[0:-1]))
+  if not os.path.exists(outdir):
+    os.mkdir(outdir)
 
   t = round(time.time(), 2)
 
